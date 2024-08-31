@@ -25,9 +25,11 @@ public class HUD : MonoBehaviour
         switch (type)
         {
             case InfoType.Time:
-                this.myText.text = Util.FormatTime(GameManager.instance.gameTime);
+                this.myText.text = $"시간 : {Util.FormatTime(GameManager.instance.gameTime)}";
                 break;
             case InfoType.Score:
+                int score = GameManager.instance.score;
+                this.myText.text = $"점수 : {Util.FormatIntToReadableString(score)}";
                 break;
         }
     }

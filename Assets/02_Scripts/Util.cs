@@ -1,3 +1,4 @@
+using System.Globalization;
 using UnityEngine;
 
 public static class Util
@@ -17,5 +18,10 @@ public static class Util
 
         timeString += minutes.ToString("00") + ":" + seconds.ToString("00");
         return timeString;
+    }
+
+    public static string FormatIntToReadableString(int number)
+    {
+        return number.ToString("N0", CultureInfo.InvariantCulture);
     }
 }

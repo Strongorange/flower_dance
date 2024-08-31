@@ -36,7 +36,10 @@ public class Player : MonoBehaviour
         {
             Debug.Log("꽃과 충돌함!");
             Destroy(other.gameObject);
-            // TODO : 꽃의 점수 판별해 점수 추가.
+            // 꽃의 점수 판별해 점수 추가.
+            int score = other.GetComponent<Flower>().score;
+            Debug.Log($"꽃 점수 : {score}");
+            GameManager.instance.GetPoint(score);
             // TODO : 사운드 추가
         }
     }

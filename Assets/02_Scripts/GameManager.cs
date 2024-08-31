@@ -14,6 +14,11 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
+    void Update()
+    {
+        this.gameTime += Time.deltaTime;
+    }
+
     void GameOver()
     {
         // 쓰레기 먹어서 게임 끝
@@ -26,8 +31,8 @@ public class GameManager : MonoBehaviour
         // 게임 시작
     }
 
-    void Update()
+    public void GetPoint(int score)
     {
-        this.gameTime += Time.deltaTime;
+        this.score += score;
     }
 }
