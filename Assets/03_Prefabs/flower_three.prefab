@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4399164202274242130}
   - component: {fileID: 4399164202274242129}
   - component: {fileID: 4399164202274242128}
+  - component: {fileID: 5791352006614050774}
   m_Layer: 0
   m_Name: flower_three
   m_TagString: Flower
@@ -133,3 +134,16 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5791352006614050774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4399164202274242141}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e2b96c56660a4d3f9d0081d113dcaca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score: 300

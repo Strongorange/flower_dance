@@ -32,6 +32,12 @@ public class Player : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // TODO : 여기에 꽃이랑 충돌시 액션 작성
+        if (other.gameObject.CompareTag("Flower"))
+        {
+            Debug.Log("꽃과 충돌함!");
+            Destroy(other.gameObject);
+            // TODO : 꽃의 점수 판별해 점수 추가.
+            // TODO : 사운드 추가
+        }
     }
 }
