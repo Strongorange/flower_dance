@@ -15,7 +15,7 @@ public class Flower : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Floor"))
         {
-            Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
         }
     }
 }

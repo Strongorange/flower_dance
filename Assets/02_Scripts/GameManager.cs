@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public float gameTime; // 게임 경과시간
     public int score; // 꽃 먹어서 얻은 점수
     public float finalScore; // 점수 * 살아남은 시간
+    public PoolManager pool;
 
     void Awake()
     {
