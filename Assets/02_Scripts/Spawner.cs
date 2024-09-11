@@ -16,6 +16,8 @@ public class Spawner : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
+
         this.spriteRenderer = GetComponent<SpriteRenderer>();
         this.spawnInterval = Random.Range(minInterval, initialMaxInterval);
     }
