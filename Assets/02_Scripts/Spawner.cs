@@ -13,11 +13,11 @@ public class Spawner : MonoBehaviour
     public float spawnInterval; // 현재 스폰 간격
     public float spawnTimer;
     private SpriteRenderer spriteRenderer;
+    private Camera mainCamera;
 
     void Awake()
     {
-        Application.targetFrameRate = 60;
-
+        this.mainCamera = Camera.main;
         this.spriteRenderer = GetComponent<SpriteRenderer>();
         this.spawnInterval = Random.Range(minInterval, initialMaxInterval);
     }
@@ -54,10 +54,13 @@ public class Spawner : MonoBehaviour
 
     Vector2 GetRandomPositionInZone()
     {
-        Vector2 spawnZoneSize = spriteRenderer.bounds.size;
+        // 카메라의 뷰포트를 기준으로 화면의 크기를 얻기
+        Vector2 screenBounds = mainCamera.ScreenToWorldPoint(
+            new Vector3(Screen.width, Screen.height, mainCamera.transform.position.z)
+        );
 
-        float randomX = Random.Range(-spawnZoneSize.x / 2, spawnZoneSize.x / 2);
+        float randomX = Random.Range(-screenBounds.x, screenBounds.x);
 
-        return (Vector2)transform.position + new Vector2(randomX, spawnZoneSize.y);
+        return new Vector2(randomX, screenBounds.y); // 화면 상단에서 떨어지는 위치
     }
 }

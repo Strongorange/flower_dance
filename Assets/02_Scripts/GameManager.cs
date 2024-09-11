@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
+        Application.targetFrameRate = 60;
         instance = this;
         isGameOver = false;
     }

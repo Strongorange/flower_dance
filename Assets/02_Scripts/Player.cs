@@ -21,7 +21,19 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
-        rigid.MovePosition(rigid.position + nextVec);
+        Vector2 newPosition = rigid.position + nextVec;
+
+        //화면 경계 계산
+        Vector2 screenBounds = Camera.main.ScreenToWorldPoint(
+            new Vector2(Screen.width, Screen.height)
+        );
+        float xLimit = screenBounds.x;
+        float yLimit = screenBounds.y;
+
+        newPosition.x = Mathf.Clamp(newPosition.x, -xLimit, xLimit);
+        newPosition.y = Mathf.Clamp(newPosition.y, -yLimit, yLimit);
+
+        rigid.MovePosition(newPosition);
 
         if (inputVec.x < 0)
         {
