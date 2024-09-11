@@ -7,6 +7,8 @@ TagManager:
   - Flower
   - Floor
   - DestoryZone
+  - Obstacle
+  - Spike
   layers:
   - Default
   - TransparentFX

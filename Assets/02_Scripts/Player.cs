@@ -42,5 +42,15 @@ public class Player : MonoBehaviour
             GameManager.instance.GetPoint(score);
             // TODO : 사운드 추가
         }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Debug.Log("스파이크와 충돌!");
+            int currentScore = GameManager.instance.score;
+            int obstacleScore = other.gameObject.GetComponent<Obstacle>().score;
+            int nextScore = Mathf.Max(0, currentScore - Mathf.Abs(obstacleScore));
+            GameManager.instance.score = nextScore;
+            other.gameObject.SetActive(false);
+            // TODO : 사운드 추가
+        }
     }
 }
