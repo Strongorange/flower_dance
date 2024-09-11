@@ -487,6 +487,7 @@ MonoBehaviour:
   - {fileID: 4404061137056140326, guid: 610197b5caf7247838ab06be8cc43a8a, type: 3}
   - {fileID: 1358752294138806031, guid: ac067d7d3bd8a1c4a9fb05099b5a4e06, type: 3}
   - {fileID: 1049023302621363167, guid: c4728654af6c1b84fb5102e3f29ffb8f, type: 3}
+  - {fileID: 1822145705061090812, guid: d6770ea3eabbc694a9bad4112d5af65b, type: 3}
 --- !u!1 &307541540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1141,6 +1142,8 @@ MonoBehaviour:
   score: 0
   finalScore: 0
   pool: {fileID: 195426927}
+  isGameOver: 0
+  gameOverUI: {fileID: 0}
 --- !u!1 &2046958847
 GameObject:
   m_ObjectHideFlags: 0

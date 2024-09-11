@@ -52,5 +52,10 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             // TODO : 사운드 추가
         }
+        else if (other.gameObject.CompareTag("GameOverGrave"))
+        {
+            Debug.Log("게임 오버 무덤 접촉");
+            GameManager.instance.GameOver();
+        }
     }
 }

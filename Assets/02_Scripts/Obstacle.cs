@@ -7,10 +7,12 @@ public class Obstacle : MonoBehaviour
     public enum ObstacleType
     {
         Spike,
-        Thorn
+        Thorn,
+        Grave
     }
 
     public int score;
+    public bool isGameOver;
 
     public ObstacleType obstacle;
 
@@ -23,6 +25,10 @@ public class Obstacle : MonoBehaviour
                 break;
             case ObstacleType.Thorn:
                 this.score = -300;
+                break;
+            case ObstacleType.Grave:
+                this.score = -999999;
+                this.isGameOver = true;
                 break;
             default:
                 this.score = -100;

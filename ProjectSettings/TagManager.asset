@@ -8,7 +8,7 @@ TagManager:
   - Floor
   - DestoryZone
   - Obstacle
-  - Spike
+  - GameOverGrave
   layers:
   - Default
   - TransparentFX

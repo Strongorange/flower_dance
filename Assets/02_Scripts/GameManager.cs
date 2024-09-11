@@ -10,26 +10,43 @@ public class GameManager : MonoBehaviour
     public float finalScore; // 점수 * 살아남은 시간
     public PoolManager pool;
 
+    public bool isGameOver;
+    public GameObject gameOverUI;
+
     void Awake()
     {
         instance = this;
+        isGameOver = false;
     }
 
     void Update()
     {
+        if (isGameOver)
+        {
+            return;
+        }
         this.gameTime += Time.deltaTime;
     }
 
-    void GameOver()
+    public void GameOver()
     {
         // 쓰레기 먹어서 게임 끝
+        this.isGameOver = true;
+        this.finalScore = score * gameTime;
         // 시간 리셋
+        Time.timeScale = 0;
         // 게임 종료 UI 표시
     }
 
-    void GameStart()
+    public void GameStart()
     {
         // 게임 시작
+        this.isGameOver = false;
+        this.gameTime = 0;
+        this.score = 0;
+        Time.timeScale = 1;
+
+        // 게임 종료 UI 숨기기
     }
 
     public void GetPoint(int score)
