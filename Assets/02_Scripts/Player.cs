@@ -8,9 +8,12 @@ public class Player : MonoBehaviour
     public int speed;
     Rigidbody2D rigid;
     public Vector2 inputVec;
+    SpriteRenderer spriteRenderer;
+    private bool isTouchActive = false; // 터치중 여부
 
     void Awake()
     {
+        this.spriteRenderer = GetComponent<SpriteRenderer>();
         this.rigid = GetComponent<Rigidbody2D>();
     }
 
@@ -19,15 +22,82 @@ public class Player : MonoBehaviour
     {
         Vector2 nextVec = inputVec * speed * Time.fixedDeltaTime;
         rigid.MovePosition(rigid.position + nextVec);
+
+        if (inputVec.x < 0)
+        {
+            spriteRenderer.flipX = true;
+        }
+        else
+        {
+            spriteRenderer.flipX = false;
+        }
     }
+
+    void Update()
+    {
+        if (Touchscreen.current != null)
+        {
+            if (Touchscreen.current.primaryTouch.press.isPressed)
+            {
+                isTouchActive = true;
+                Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+                if (touchPosition.x < Screen.width / 2)
+                {
+                    inputVec = new Vector2(-1, 0);
+                }
+                else
+                {
+                    inputVec = new Vector2(1, 0);
+                }
+            }
+            else
+            {
+                isTouchActive = false;
+                inputVec = Vector2.zero; // 터치가 비활성화된 경우 이동 중지
+            }
+        }
+    }
+
+    // void OnMove(InputValue input)
+    // {
+    //     if (Touchscreen.current != null && Touchscreen.current.primaryTouch.press.isPressed)
+    //     {
+    //         isTouchActive = true;
+    //         // 화면 오른쪽 왼쪽 터치 판단
+    //         Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+    //         if (touchPosition.x < Screen.width / 2)
+    //         {
+    //             inputVec = new Vector2(-1, 0);
+    //         }
+    //         else
+    //         {
+    //             inputVec = new Vector2(1, 0);
+    //         }
+    //     }
+    //     else
+    //     // 키보드 입력 처리
+    //     {
+    //         // 손가락 떼지면 터치중 상태 false;
+    //         isTouchActive = false;
+
+    //         // 좌우 움직임만 받기위해 inputVec을 입력의 X 축만 사용
+    //         Vector2 rawInput = input.Get<Vector2>();
+    //         this.inputVec = new Vector2(rawInput.x, 0);
+    //         // 상하 좌우 입력을 모두 받으려면 아래 주석만 사용
+    //         // this.inputVec = input.Get<Vector2>();
+    //     }
+    // }
 
     void OnMove(InputValue input)
     {
-        // 좌우 움직임만 받기위해 inputVec을 입력의 X 축만 사용
-        Vector2 rawInput = input.Get<Vector2>();
-        this.inputVec = new Vector2(rawInput.x, 0);
-        // 상하 좌우 입력을 모두 받으려면 아래 주석만 사용
-        // this.inputVec = input.Get<Vector2>();
+        if (Touchscreen.current == null || !isTouchActive)
+        {
+            // 키보드 입력 처리
+            Vector2 rawInput = input.Get<Vector2>();
+            this.inputVec = new Vector2(rawInput.x, 0);
+            // 상하 좌우 입력을 모두 받으려면 아래 주석만 사용
+            // this.inputVec = input.Get<Vector2>();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D other)

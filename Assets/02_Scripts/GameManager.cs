@@ -68,4 +68,10 @@ public class GameManager : MonoBehaviour
     {
         this.score += score;
     }
+
+    public void SaveGame()
+    {
+        // DB에 정보 저장
+        Debug.Log("저장 함수 실행");
+    }
 }
