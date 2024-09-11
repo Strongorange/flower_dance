@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     public bool isGameOver;
     public GameObject gameOverUI;
+
+    // UI 텍스트 요소
+    public Text timeText;
+    public Text scoreText;
+    public Text totalScoreText;
 
     void Awake()
     {
@@ -30,12 +36,20 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
-        // 쓰레기 먹어서 게임 끝
+        // 묘비 먹어서 게임 끝
         this.isGameOver = true;
         this.finalScore = score * gameTime;
-        // 시간 리셋
-        Time.timeScale = 0;
+
+        // 게임 종료에 표시할 텍스트 업데이트
+        timeText.text = "시간: " + Util.FormatTime(gameTime); // FormatTime 함수 사용
+        scoreText.text = "획득한 점수: " + Util.FormatIntToReadableString(score);
+        totalScoreText.text =
+            "최종점수: " + Util.FormatIntToReadableString(Mathf.FloorToInt(finalScore));
         // 게임 종료 UI 표시
+        this.gameOverUI.SetActive(true);
+
+        // 시간 멈추기
+        Time.timeScale = 0;
     }
 
     public void GameStart()
@@ -47,6 +61,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
 
         // 게임 종료 UI 숨기기
+        this.gameOverUI.SetActive(false);
     }
 
     public void GetPoint(int score)
