@@ -15,9 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverUI;
 
     // UI 텍스트 요소
-    public Text timeText;
-    public Text scoreText;
-    public Text totalScoreText;
+    public UIManager uiManaer;
 
     void Awake()
     {
@@ -42,10 +40,8 @@ public class GameManager : MonoBehaviour
         this.finalScore = score * gameTime;
 
         // 게임 종료에 표시할 텍스트 업데이트
-        timeText.text = "시간: " + Util.FormatTime(gameTime); // FormatTime 함수 사용
-        scoreText.text = "획득한 점수: " + Util.FormatIntToReadableString(score);
-        totalScoreText.text =
-            "최종점수: " + Util.FormatIntToReadableString(Mathf.FloorToInt(finalScore));
+        this.uiManaer.DisplayGameOverUI(finalScore);
+
         // 게임 종료 UI 표시
         this.gameOverUI.SetActive(true);
 
