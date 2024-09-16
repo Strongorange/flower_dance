@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
 
         rigid.MovePosition(newPosition);
 
+        // 플레이어 스프라이트 방향 설정
         if (inputVec.x < 0)
         {
             spriteRenderer.flipX = true;
@@ -47,27 +48,49 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if (Touchscreen.current != null)
+        inputVec = Vector2.zero; // 기본적으로 멈추는 상태로 설정
+
+        /**
+        WebGL 환경에서 움직임 입려처리
+        */
+        if (Input.GetMouseButton(0))
         {
-            if (Touchscreen.current.primaryTouch.press.isPressed)
+            Vector3 mousePosition = Input.mousePosition;
+            if (mousePosition.x < Screen.width / 2)
             {
-                isTouchActive = true;
-                Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
-                if (touchPosition.x < Screen.width / 2)
-                {
-                    inputVec = new Vector2(-1, 0);
-                }
-                else
-                {
-                    inputVec = new Vector2(1, 0);
-                }
+                inputVec = new Vector2(-1, 0);
             }
             else
             {
-                isTouchActive = false;
-                inputVec = Vector2.zero; // 터치가 비활성화된 경우 이동 중지
+                inputVec = new Vector2(1, 0);
             }
         }
+
+        /**
+        모바일 환경에서 터치 처리 (앱으로 빌드했을때)
+        WebGL 환경에서는 동작 하지 않아서 아래에 마우스 클릭으로 동일한 기능 구현
+        */
+        // if (Touchscreen.current != null)
+        // {
+        //     if (Touchscreen.current.primaryTouch.press.isPressed)
+        //     {
+        //         isTouchActive = true;
+        //         Vector2 touchPosition = Touchscreen.current.primaryTouch.position.ReadValue();
+        //         if (touchPosition.x < Screen.width / 2)
+        //         {
+        //             inputVec = new Vector2(-1, 0);
+        //         }
+        //         else
+        //         {
+        //             inputVec = new Vector2(1, 0);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         isTouchActive = false;
+        //         inputVec = Vector2.zero; // 터치가 비활성화된 경우 이동 중지
+        //     }
+        // }
     }
 
     // void OnMove(InputValue input)
